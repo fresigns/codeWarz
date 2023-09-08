@@ -192,12 +192,323 @@ function isPalindrome(x) {
     }
 
     let qString = q.join('').toLowerCase();
+    console.log(qString);
 
-    if (qString === x) {
+    if (qString === x.toLowerCase()) {
         return true
     } else {
         return false
     }
     console.log(q);
 }
-console.log(isPalindrome('portaLAnonnaALBIOPARCOoOoO'));
+console.log(isPalindrome('itOpinOnavEvanOnipoti'));
+
+// V2 ---------------------------------- */
+
+// // Implementation
+// function isPalindrome(myString) {
+//   // transform the input string to lowercase
+//   const lowercaseInput = myString.toLowerCase();
+
+//   // to have a similar wording
+//   const forward = lowercaseInput;
+
+//   // get the backward version of the lowercase string
+//   const backward = lowercaseInput.split("").reverse().join("");
+
+//   // check if the forward string is the same as the backward string
+//   return forward === backward;
+// }
+
+// Result
+// console.log(isPalindrome("Abba")); // true
+// console.log(isPalindrome("hello")); // false
+
+// V3 ---------------------------------- */
+// const isPalindrome = (x) => {
+//     return x.split("").reverse().join("").toLowerCase() === x.toLowerCase() ? true : false
+//   }
+
+/* --------------------------------------------------------------- */
+/* --------------------------------------------------------------- */
+
+/* GIORNO 2 */
+
+/* --------------------------------------------------------------- */
+// esercizio 9
+/* --------------------------------------------------------------- */
+// All Star Code Challenge #18
+
+// Create a function that accepts a string and a single character, 
+// and returns an integer of the count of occurrences the 2nd argument is found in the first one.
+
+// If no occurrences can be found, a count of 0 should be returned.
+
+// ("Hello", "o")  ==>  1
+// ("Hello", "l")  ==>  2
+// ("", "z")       ==>  0
+
+// str_count("Hello", 'o'); // returns 1
+// str_count("Hello", 'l'); // returns 2
+// str_count("", 'z'); // returns 0
+
+// Notes
+// The first argument can be an empty string
+// In languages with no distinct character data type, 
+// the second argument will be a string of length 1
+
+function strCount(str, letter){  
+    let strArray = str.split('');
+    return strArray.filter((currentLetter) => currentLetter == letter).length;
+  }
+
+// il metodo filter prende un array e toglie gli elementi che non soddisfano
+// una condizione data (in questo caso, la condizione è essere uguale a letter)
+
+/* --------------------------------------------------------------- */
+// esercizio 10 - Quarter of the year
+/* --------------------------------------------------------------- */
+
+// Given a month as an integer from 1 to 12, 
+// return to which quarter of the year it belongs as an integer number.
+
+// For example: month 2 (February), is part of the first quarter; 
+// month 6 (June), is part of the second quarter; 
+// and month 11 (November), is part of the fourth quarter.
+
+//
+// g f m
+// a m g
+// l a s
+// o n d
+// 
+
+const quarterOf = (month) => {
+    
+    if (month >= 1 && month <= 3) {
+        return 1;
+    } else if (month >= 4 && month <= 6){
+        return 2;
+    } else if (month >= 7 && month <= 9){
+        return 3
+    } else if (month >= 10 && month <= 12){
+        return 4
+    }
+  }
+
+  // V2
+  const quarterOf2 = (month) => {
+    if (month <= 3) {
+      return 1
+    } else if (month <= 6) {
+      return 2
+    } else if (month <= 9) {
+      return 3
+    } else if (month <= 12) {
+      return 4
+    }
+  }
+
+//   V3
+  const quarterOf3 = (month) => {
+    
+    if (month === 1 || month === 2 || month === 3) {
+        return 1 
+    } else if (month === 4 || month === 5 || month === 6){
+        return 2
+    } else if (month === 7 || month === 8 || month === 9){
+        return 3
+    } else if (month === 10 || month === 11 || month === 12){
+        return 4
+    }
+  }
+
+//   V4 Operatore Ternario
+const quarterOf4 = (month) => {
+    return month < 4 ? 1 : month < 7 ? 2 : month < 10 ? 3 : 4;
+  }
+
+/* --------------------------------------------------------------- */
+// esercizio 11 - Convert number to reversed array of digits
+/* --------------------------------------------------------------- */
+
+// Convert number to reversed array of digits
+
+// Given a random non-negative number, 
+// you have to return the digits of this number
+// within an array in reverse order.
+
+// Example(Input => Output):
+
+// 35231 => [1,3,2,5,3]
+// 0 => [0]
+
+function digitize(n) {
+    let nString = n.toString();
+    console.log(nString);
+
+    let nArray = nString.split(''); 
+    // .split trasforma la stringa in array dei suoi caratteri
+    // 'casa' => ['c','a','s','a']
+
+    let nums = nArray.map(function(str){
+        return parseInt(str)
+    });
+
+    return nums.reverse();
+}
+console.log(digitize(35231));
+
+// VERSIONE MODICATA - Reverse di una frase
+
+function palindrome(str){
+    let strArray = str.split(' ');
+    // 'la casa blu' => ['blu','casa','la']
+
+    let reverseArray = strArray.reverse();
+    return reverseArray;
+
+    // slim version:
+    // return strArray.reverse();
+}
+console.log(palindrome('la casa blu'));
+
+/* --------------------------------------------------------------- */
+// esercizio 12 - Grade book
+/* --------------------------------------------------------------- */
+// Complete the function so that it finds the average of the three scores 
+// passed to it and returns the letter value associated with that grade.
+
+// Numerical Score 	Letter Grade
+// 90 <= score <= 100 	'A'
+// 80 <= score < 90 	'B'
+// 70 <= score < 80 	'C'
+// 60 <= score < 70 	'D'
+// 0 <= score < 60 	'F'
+
+// Tested values are all between 0 and 100. 
+// Theres is no need to check for negative values or values greater than 100.
+
+function getGrade (s1, s2, s3) {
+    let average = (s1 + s2 + s3) / 3;
+
+    if (average < 60) {
+        return 'F'
+    } else if (average < 70){
+        return 'D'
+    } else if (average < 80){
+        return 'C'
+    } else if (average < 90){
+        return 'B'
+    } else {
+        return 'A'
+    }
+  }
+
+// V2 - Operatore ternario 
+
+function getGrade (s1, s2, s3) {
+    var s = (s1 + s2 + s3) / 3
+    return s >= 90 ? "A" : s >= 80 ? "B" : s >= 70 ? "C" : s >= 60 ? "D" : "F"
+  }
+
+
+/* --------------------------------------------------------------- */
+// esercizio 13 - Summation
+/* --------------------------------------------------------------- */
+
+// Write a program that finds the summation of every number from 1 to num. 
+// The number will always be a positive integer greater than 0.
+
+// For example (Input -> Output):
+// 2 -> 3 (1 + 2)
+// 8 -> 36 (1 + 2 + 3 + 4 + 5 + 6 + 7 + 8)
+
+var summation = function (num) {
+    let sum = 0;
+    for (let i = 1; i <= n; i++) {
+        sum += i;
+      }
+      return sum;
+  }
+
+/* --------------------------------------------------------------- */
+// esercizio 14 - Remove the minimum
+/* --------------------------------------------------------------- */
+// Task
+
+// Given an array of integers, remove the smallest value. 
+// Do not mutate the original array/list. If there are multiple elements with the same value, 
+// remove the one with a lower index. If you get an empty array/list, return an empty array/list.
+
+// Don't change the order of the elements that are left.
+
+// Examples
+// * Input: [1,2,3,4,5], output = [2,3,4,5]
+// * Input: [5,3,2,1,4], output = [5,3,2,4]
+// * Input: [2,2,1,2,1], output = [2,2,2,1]
+
+function removeSmallest(numbers) {
+    let minimumNumber = Math.min(...numbers);
+    let arrNumber = [];
+
+    const index = numbers.indexOf(minimumNumber)
+
+    for (let i = 0; i < numbers.length; i++) {
+        const element = numbers[i];
+        arrNumber.push(element);
+    }
+
+    if(index > -1){
+        arrNumber.splice(index,1)
+    }
+    return arrNumber;
+    
+  }
+
+  console.log(removeSmallest([2,2,1,2,1]));
+
+// esercizio 666 - Count of positives / sum of negatives
+
+// Given an array of integers.
+
+// Return an array, where the first element is the count of positives numbers 
+// and the second element is sum of negative numbers. 0 is neither positive nor negative.
+
+// If the input is an empty array or is null, return an empty array.
+// Example
+
+// For input [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14, -15], you should return [10, -65].
+
+function countPositivesSumNegatives(input) {
+    if (!input || input.length === 0) {
+        return [];
+    }
+    
+    let isPositive = [];
+    let isNegative = [];
+    let solution = [];
+
+    for (let i = 0; i < input.length; i++) {
+        const element = input[i];
+
+        if (element > 0) {
+            isPositive.push(element);            
+        } else if (element < 0){
+            isNegative.push(element);
+        } 
+    }
+
+    let positiveCount = isPositive.length;
+    let negativeSum = isNegative.reduce((acc, curr) => acc + curr, 0);
+    
+    solution.push(positiveCount);
+    solution.push(negativeSum);
+
+    return solution;
+
+    // console.log(isPositive);
+    // console.log(isNegative);
+  }
+
+  console.log(countPositivesSumNegatives([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14, -15]));
